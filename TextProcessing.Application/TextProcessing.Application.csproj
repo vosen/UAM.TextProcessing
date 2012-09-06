@@ -128,7 +128,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SQLFilter\TextProcessing.SQLFilter.csproj">
+    <ProjectReference Include="..\TextProcessing.SQLFilter\TextProcessing.SQLFilter.csproj">
       <Project>{8A040ABA-4C9F-4F61-A348-29FFDE973CDE}</Project>
       <Name>TextProcessing.SQLFilter</Name>
     </ProjectReference>
