@@ -1,0 +1,54 @@
+grammar StringPattern;
+
+options 
+{
+	language=CSharp3;
+	TokenLabelType=CommonToken;
+	output=AST;
+	ASTLabelType=StringTree;
+}
+
+tokens
+{
+	PERCENT		= '%' ;
+	UNDERSCORE	= '_' ;
+	QUOTE		= '\'' ;
+	PATTERN;
+	IS;
+	BEGINS;
+	ENDS;
+	CONTAINS;
+	COMPLEX;
+}
+
+@lexer::namespace{ Vosen.SQLFilter }
+@parser::namespace{ Vosen.SQLFilter }
+
+fragment
+ESC_SEQ			: '\\%' | '\\_' | '\\\'' ;
+TEXT			: (ESC_SEQ | ~(PERCENT | UNDERSCORE | QUOTE))+ ;
+
+
+public
+parse			: pattern_is -> ^(IS pattern_is)
+				| pattern_contains -> ^(CONTAINS pattern_contains)
+				| pattern_begins -> ^(BEGINS pattern_begins)
+				| pattern_ends -> ^(ENDS pattern_ends)
+				| pattern_complex -> ^(COMPLEX TEXT[$pattern_complex.text] )
+				;
+
+pattern_is		: /* empty */ -> TEXT[""]
+				| TEXT -> TEXT;
+
+pattern_contains: (PERCENT)+ TEXT (PERCENT)+ -> TEXT ;
+
+pattern_begins	: TEXT (PERCENT)+ -> TEXT ;
+
+pattern_ends	: (PERCENT)+ TEXT -> TEXT ;
+
+/*
+	complex input is different in that it either contains underscore
+	somewhere or percent not on beginning/end of the string
+*/
+pattern_complex	: ((TEXT| PERCENT)* UNDERSCORE (TEXT | UNDERSCORE | PERCENT)*)
+				| (TEXT PERCENT (TEXT | PERCENT)* TEXT) ;

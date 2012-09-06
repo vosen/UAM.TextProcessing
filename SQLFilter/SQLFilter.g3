@@ -1,0 +1,145 @@
+﻿grammar SQLFilter;
+
+options
+{
+	language=CSharp3;
+	TokenLabelType=CommonToken;
+	output=AST;
+	ASTLabelType=FilterTree;
+}
+
+tokens
+{ 
+	DQUOTE		= '\"' ;
+	ESC_QUOTE	= '\\\'' ;
+	QUOTE		= '\'' ;
+	LPAREN		= '(' ;
+	RPAREN		= ')' ;
+	GREATER		= '>' ;
+	EQUALS		= '=' ;
+	LESSER		= '<' ;
+	NOTEQUALS	= '<>' ;
+	STRINGPATTERN ;
+	ENUM_EXPR ;
+	STRING_EXPR ;
+	IP_EXPR ;
+	NUM_EXPR ;
+	BOOL_EXPR ;
+	EXPR_GROUP ;
+	NOT_AND;
+	NOT_OR;
+	/* Those tokens are used internally */
+	INT8 ;
+	INT16 ;
+	INT32 ;
+	INT64 ;
+	BOOL ;
+	ENUM ;
+}
+
+@lexer::namespace { Vosen.SQLFilter }
+@parser::namespace { Vosen.SQLFilter }
+
+NOT				: 'Not' | 'NOT' ;
+LIKE			: 'Like' | 'LIKE' ;
+AND				: 'And' | 'AND' ;
+OR				: 'Or' | 'OR' ; 
+IS				: 'Is' | 'IS' ;
+TRUE			: 'True' | 'TRUE' ;
+FALSE			: 'False' | 'FALSE' ;
+ID				: ('_'|'a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
+fragment
+IP_DIGIT		: ('2''5'('0'..'5'))| ('2'('0'..'4')('0'..'9')) | ('1')('0'..'9')('0'..'9') | ('1'..'9')('0'..'9') | ('0'..'9');
+IPV4			: IP_DIGIT '.' IP_DIGIT '.' IP_DIGIT '.' IP_DIGIT ;
+GREATEROREQUALS	: GREATER EQUALS | EQUALS GREATER ;
+LESSEROREQUALS	: LESSER EQUALS | EQUALS LESSER ;
+STRING			: QUOTE ( ~QUOTE | ESC_QUOTE )* QUOTE ;
+INT				: '-'?'0'..'9'+ ;
+WS				: ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ 	{ Skip(); } ;
+
+
+public prog		: expr_group -> {groupify($expr_group.tree)}
+				;
+
+/* group is either: simple expr without AND/OR, AND group of simple expr, OR group of simple expr and AND groups */
+expr_group		: /* empty */
+				| (expr
+				( 
+					/* empty */ -> expr
+					| expr_cont_and+
+					(
+						/* empty */ -> ^(AND expr expr_cont_and+)
+						| expr_cont_or+ -> ^(OR ^(AND expr expr_cont_and+) expr_cont_or+)
+					)
+					| expr_cont_or+ -> ^(OR expr expr_cont_or+)
+				))
+				;
+
+/* left refactored :
+expr_group_and	: expr expr_cont_and+ -> ^(AND expr expr_cont_and+)
+				;
+
+expr_group_or	: expr (| expr_cont_and+) expr_cont_or+ -> ^(OR expr expr_cont_and+ expr_cont_or+)
+				;
+*/
+	
+expr_cont_and	: (AND expr) -> expr ;
+		
+expr_cont_or	: (OR (expr (
+						/*empty*/ -> expr									/* simple expr */
+						|  expr_cont_and+ -> ^(AND expr expr_cont_and+)		/* and group */
+						)))
+				;
+
+expr			: expr_subgroup
+				| expr_leaf {markAsLeaf($expr_leaf.tree);}
+				;
+
+expr_subgroup	: LPAREN expr_group RPAREN -> expr_group
+				| NOT LPAREN expr_group RPAREN -> {rewriteWithNot($expr_group.tree)}
+				;
+
+expr_leaf		: num_expr -> ^(NUM_EXPR num_expr)
+				| string_expr -> ^(STRING_EXPR string_expr)
+				| enum_expr -> ^(ENUM_EXPR enum_expr)
+				| ip_expr -> ^(IP_EXPR ip_expr)
+				| bool_expr -> ^(BOOL_EXPR bool_expr)
+				;
+		
+num_expr		: id_value num_op INT -> ^(num_op id_value INT)
+				| INT num_op id_value -> ^({reverseOperator($num_op.tree)} id_value INT)
+				;
+
+ip_expr			: id_value num_op IPV4 -> ^(num_op id_value IPV4)
+				| IPV4 num_op id_value -> ^({reverseOperator($num_op.tree)} id_value IPV4)
+				;
+		
+num_op			: GREATER | LESSER | EQUALS | GREATEROREQUALS | LESSEROREQUALS | NOTEQUALS ;
+	
+string_expr		: string_pattern LIKE id_value -> {makeFirstLeftSubchild($string_pattern.tree, $id_value.tree)}
+				| string_pattern NOT LIKE id_value -> ^(NOT {makeFirstLeftSubchild($string_pattern.tree, $id_value.tree)})
+				| id_value LIKE string_pattern -> {makeFirstLeftSubchild($string_pattern.tree, $id_value.tree)}
+				| id_value NOT LIKE string_pattern -> ^(NOT {makeFirstLeftSubchild($string_pattern.tree, $id_value.tree)})
+				;
+
+string_pattern	: STRING -> {stringPatternAST(stripQuotes($STRING.Text))}
+				;
+
+enum_expr		: id_value enum_op enum_value -> ^(enum_op id_value enum_value)
+				| enum_value enum_op id_value -> ^(enum_op id_value enum_value)
+				;
+
+enum_value		: STRING -> STRING[stripQuotes($STRING.Text)] 
+				;
+		
+enum_op			: NOTEQUALS | EQUALS ;
+
+id_value		: ID -> ^(ID)
+				| DQUOTE ID DQUOTE -> ^(ID)
+				;
+
+bool_expr		: id_value IS bool_value -> ^(IS id_value bool_value)
+				| bool_value IS id_value -> ^(IS id_value bool_value)
+				;
+
+bool_value		: TRUE | FALSE ;

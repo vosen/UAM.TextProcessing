@@ -1,0 +1,91 @@
+Maria Anders	Berlin	339669496	2	17	true
+Ana Trujillo	México D.F.	2318444491	2	521	true
+Antonio Moreno	México D.F.	1868525701	3	192	true
+Thomas Hardy	London	4087757871	2	662	false
+Christina Berglund	Lulea	3393838575	1	593	false
+Hanna Moos	Mannheim	3549072406	1	42	false
+Frédérique Citeaux	Strasbourg	1399108390	1	119	false
+Martín Sommer	Madrid	3789815650	1	135	false
+Laurence Lebihan	Marseille	3188686915	2	381	true
+Elizabeth Lincoln	Tsawassen	3344320062	1	903	false
+Victoria Ashworth	London	4250386001	1	791	true
+Patricio Simpson	Buenos Aires	2961111660	3	288	true
+Francisco Chang	México D.F.	858053108	1	404	false
+Yang Wang	Bern	4256625280	2	592	true
+Pedro Afonso	Sao Paulo	997983432	2	184	true
+Elizabeth Brown	London	3556122697	3	701	true
+Sven Ottlieb	Aachen	3690122621	1	72	false
+Janine Labrune	Nantes	3837532943	1	825	false
+Ann Devon	London	3527338477	3	712	false
+Roland Mendel	Graz	790237851	1	442	true
+Aria Cruz	Sao Paulo	3910504869	3	296	false
+Diego Roel	Madrid	4253903939	2	596	false
+Martine Rancé	Lille	1866720856	2	120	false
+Maria Larsson	Bräcke	851584920	3	176	true
+Peter Franken	München	966699499	1	515	false
+Carine Schmitt	Nantes	792858650	1	13	false
+Paolo Accorti	Torino	1743744806	2	389	true
+Lino Rodriguez	Lisboa	746836877	2	940	false
+Eduardo Saavedra	Barcelona	4104960363	3	299	true
+José Pedro Freyre	Sevilla	35018246	2	453	true
+André Fonseca	Campinas	4241565503	3	323	true
+Howard Snyder	Eugene	2463898792	1	248	false
+Manuel Pereira	Caracas	1391513059	1	806	true
+Mario Pontes	Rio de Janeiro	2815120844	2	514	true
+Carlos Hernández	San Cristóbal	2184852578	1	969	true
+Yoshi Latimer	Elgin	567616019	2	120	true
+Patricia McKenna	Cork	4275643376	3	318	false
+Helen Bennett	Hedge End	2100777591	3	565	true
+Philip Cramer	Brandenburg	1733684075	2	848	false
+Daniel Tonini	Versailles	1188272804	3	404	true
+Annette Roulet	Toulouse	4275227637	2	910	true
+Yoshi Tannamuri	Vancouver	46596150	1	401	false
+John Steel	Walla Walla	1698223758	1	787	true
+Renate Messner	Frankfurt a.M.	2135303576	2	109	false
+Jaime Yorres	San Francisco	2679140299	1	928	false
+Carlos González	Barquisimeto	1672742525	3	57	true
+Felipe Izquierdo	I. de Margarita	2346926564	2	542	false
+Fran Wilson	Portland	4164045153	2	567	true
+Giovanni Rovelli	Bergamo	536584725	3	403	false
+Catherine Dewey	Bruxelles	1086791974	3	244	false
+Jean Fresniere	Montréal	3918226036	3	916	true
+Alexander Feuer	Leipzig	723825911	1	387	true
+Simon Crowther	London	2409846552	3	692	true
+Yvonne Moncada	Buenos Aires	1524674673	2	832	true
+Rene Phillips	Anchorage	3764035347	3	810	false
+Henriette Pfalzheim	Köln	4183987749	2	857	false
+Marie Bertrand	Paris	1634336371	2	931	true
+Guillermo Fernández	México D.F.	3285814290	2	394	false
+Georg Pipps	Salzburg	3097148962	3	562	true
+Isabel de Castro	Lisboa	198995362	1	98	true
+Bernardo Batista	Rio de Janeiro	1157578338	1	199	false
+Lúcia Carvalho	Sao Paulo	3491227897	1	403	false
+Horst Kloss	Cunewalde	2417957190	2	250	true
+Sergio Gutiérrez	Buenos Aires	1241606898	3	460	false
+Paula Wilson	Albuquerque	2996323566	2	928	false
+Maurizio Moroni	Reggio Emilia	4083190087	2	346	true
+Janete Limeira	Rio de Janeiro	3309905463	2	944	true
+Michael Holz	Geneve	3332134384	1	648	false
+Alejandra Camino	Madrid	1844277915	3	821	false
+Jonas Bergulfsen	Stavern	2985219823	2	693	false
+Jose Pavarotti	Boise	3868620635	3	645	false
+Hari Kumar	London	449815554	2	188	false
+Jytte Petersen	Kobenhavn	3143608873	3	486	false
+Dominique Perrier	Paris	4121750250	3	575	true
+Art Braunschweiger	Lander	1904253319	2	760	false
+Pascale Cartrain	Charleroi	192496097	3	919	true
+Liz Nixon	Portland	1204898110	3	38	false
+Liu Wong	Butte	744126300	2	68	true
+Karin Josephs	Münster	3007727143	2	941	false
+Miguel Angel Paolino	México D.F.	3402272726	1	958	true
+Anabela Domingues	Sao Paulo	4228206177	3	458	true
+Helvetius Nagy	Kirkland	1397212268	1	874	true
+Palle Ibsen	Arhus	3924889427	1	312	false
+Mary Saveley	Lyon	3694912271	1	725	true
+Paul Henriot	Reims	696461719	2	669	false
+Rita Müller	Stuttgart	489942419	2	184	true
+Pirkko Koskitalo	Oulu	2876454135	2	454	true
+Paula Parente	Resende	3046318635	2	371	false
+Karl Jablonski	Seattle	2883202021	1	197	true
+Matti Karttunen	Helsinki	3157282762	1	106	true
+Zbyszek Piestrzeniewicz	Warszawa	3078735584	2	586	true

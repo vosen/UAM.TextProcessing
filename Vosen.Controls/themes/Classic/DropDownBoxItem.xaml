@@ -1,0 +1,75 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:vanilla="clr-namespace:Vosen.Controls"
+	xmlns:Microsoft_Windows_Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic">
+	
+	<vanilla:DarkenLightenColor x:Key="darkenColor" />
+	<vanilla:ScreenColors x:Key="screenColors" />
+	<vanilla:IsSeparator x:Key="IsContentSeparator" />
+	<sys:Single x:Key="borderParam">0.2</sys:Single>
+	<sys:Single x:Key="backgroundParam">0.05</sys:Single>
+	<SolidColorBrush x:Key="{ComponentResourceKey {x:Type vanilla:DropDownBox}, NicerBorderBrush}" Color="{Binding Converter={StaticResource darkenColor}, ConverterParameter={StaticResource borderParam}, Source={StaticResource {x:Static SystemColors.WindowColorKey}}}"/>
+	<SolidColorBrush x:Key="{ComponentResourceKey {x:Type vanilla:DropDownBox}, NicerBackgroundBrush}" Color="{Binding Converter={StaticResource darkenColor}, ConverterParameter={StaticResource backgroundParam}, Source={StaticResource {x:Static SystemColors.WindowColorKey}}}"/>
+
+	<!-- Lifted from MenuItem.SubmenuItemTemplate -->
+	<Style TargetType="{x:Type vanilla:DropDownBoxItem}" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+
+		<Setter Property="Padding" Value="3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type vanilla:DropDownBoxItem}">
+					<Border Name="Bd"
+						Background="{TemplateBinding Background}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						BorderBrush="{TemplateBinding BorderBrush}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Border x:Name="IconBorder"
+									SnapsToDevicePixels="True"
+									BorderThickness="0,0,1,0"
+									Background="{StaticResource {ComponentResourceKey {x:Type vanilla:DropDownBox}, NicerBackgroundBrush}}"
+									BorderBrush="{StaticResource {ComponentResourceKey {x:Type vanilla:DropDownBox}, NicerBorderBrush}}">
+								<ContentPresenter x:Name="Icon"
+									Margin="{TemplateBinding Padding}"
+									VerticalAlignment="Center"
+									ContentSource="Icon"/>
+							</Border>
+							<ContentPresenter Name="presenter"
+								Grid.Column="1"
+								Margin="{TemplateBinding Padding}"
+								VerticalAlignment="Center"
+								RecognizesAccessKey="True"/>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Icon" Value="{x:Null}">
+							<Setter TargetName="Icon" Property="Visibility" Value="Collapsed"/>
+						</Trigger>
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter TargetName="IconBorder" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+							<Setter TargetName="IconBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+							<Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+						<!-- Remove margin from separator -->
+						<DataTrigger Binding="{Binding ElementName=presenter, Path=Content, Converter={StaticResource IsContentSeparator}}" Value="true">
+							<Setter TargetName="presenter" Property="Margin" Value="0" />
+						</DataTrigger>                        
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>            
+		</Setter>
+		<Style.Triggers>
+
+		</Style.Triggers>
+	</Style>
+
+</ResourceDictionary>
