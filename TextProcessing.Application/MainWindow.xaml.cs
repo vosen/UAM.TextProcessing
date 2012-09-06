@@ -30,13 +30,6 @@ namespace SQLFilter.FilterView.Test
             InitializeComponent();
             FilterObject.PropertyChanged += (src, arg) => UpdateFilter(arg.PropertyName);
         }
-        /*
-        public MainWindow()
-            : base()
-        {
-            InitializeComponent();
-        }
-         * */
 
         private void PropertyBoxUpdated(object sender, DataTransferEventArgs e)
         {
