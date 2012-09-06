@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.3.0.7239, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\lib\antl-patched\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\antlr-dotnet-csharpbootstrap\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,20 +66,18 @@
     <Antlr3 Include="SQLFilter.g3">
       <Generator>MSBuild:Compile</Generator>
     </Antlr3>
-  </ItemGroup>
-  <ItemGroup>
     <Antlr3 Include="StringPattern.g3">
       <Generator>MSBuild:Compile</Generator>
     </Antlr3>
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <!-- Folder containing AntlrBuildTask.dll -->
-    <AntlrBuildTaskPath>$(SolutionDir)lib\Antlr</AntlrBuildTaskPath>
+    <AntlrBuildTaskPath>$(ProjectDir)..\antlr-dotnet-csharpbootstrap</AntlrBuildTaskPath>
     <!-- Path to the ANTLR Tool itself. -->
-    <AntlrToolPath>$(SolutionDir)lib\Antlr\Antlr3.exe</AntlrToolPath>
+    <AntlrToolPath>$(ProjectDir)..\antlr-dotnet-csharpbootstrap\Antlr3.exe</AntlrToolPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)lib\Antlr\Antlr3.targets" />
+  <Import Project="$(ProjectDir)..\antlr-dotnet-csharpbootstrap\Antlr3.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

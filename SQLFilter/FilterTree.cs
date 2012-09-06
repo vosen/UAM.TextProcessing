@@ -96,7 +96,7 @@ namespace Vosen.SQLFilter
             }
             set
             {
-                this.token.Type = value;
+                this.Token.Type = value;
                 OnChanged("Type");
             }
         }
@@ -118,11 +118,11 @@ namespace Vosen.SQLFilter
         {
             get
             {
-                return this.token.Text;
+                return this.Token.Text;
             }
             set
             {
-                this.token.Text = value;
+                this.Token.Text = value;
                 OnChanged("Text");
             }
         }
@@ -202,7 +202,7 @@ namespace Vosen.SQLFilter
             {
                 return "<errornode>";
             }
-            if (tree.token == null)
+            if (tree.Token == null)
             {
                 return string.Empty;
             }
